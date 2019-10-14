@@ -17,8 +17,25 @@ class JoseHuLinkedList{
 
     private PersonNode first=null;// 链表第一个节点
 
-    public void addPerson(){
-        
+    public void addPerson(int nums){
+        if (nums<1){
+            System.out.println("nums值不能小于1");
+        }
+        PersonNode currPerson=null;
+        for (int i=0;i<nums;i++){
+            PersonNode person=new PersonNode(i);
+            if (i==1){
+                first=person;//初始链表第一个元素
+                person.setNext(person);
+                currPerson=first; //声明一个辅助变量
+            }else{
+                //将当前对象
+                currPerson.setNext(person);
+                person.setNext(first);
+            }
+
+        }
+
     }
 
 }
