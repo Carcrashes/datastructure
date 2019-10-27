@@ -38,6 +38,67 @@ class JoseHuLinkedList{
 
     }
 
+    /**
+     * 展示环形队列所有元素
+     */
+    public void showLinkedList(){
+        if (first==null){
+            System.out.println("This is empty linkedList");
+            return;
+        }
+        //因为first不能动，所以需要一个临时变量
+        PersonNode temp=first;
+        while(true){
+            System.out.printf("boy's number is %d",temp.getNo());
+            if (temp.getNext()==first){
+                break;
+            }
+        }
+    }
+
+    public  void countPerson(int startNo,int countNum,int nums){
+        if(first==null|| startNo<1 || startNo>nums){
+            System.out.println("参数有错，请确认后输入");
+            return;
+        }
+
+
+        //创建一个辅助变量，指向最后一个节点/
+        PersonNode helper=first;
+        while (true){
+            if (helper.getNext()==first){
+                //找到最后一个节点
+                break;
+            }
+            helper=helper.getNext();//节点后移
+        }
+
+        //报数前移动k-1位(点数时候包含本身)
+        for (int j=0;j<startNo-1;j++){
+            first=first.getNext();
+            helper=helper.getNext();
+        }
+
+        //小孩报数时候，让first和helper同时移动指针m-1次
+        while(true){
+            if (helper==first){
+                break;//圈中只有一个节点
+            }
+            for(int j=0;j<countNum-1;j++){
+                first=first.getNext();
+                helper=helper.getNext();
+            }
+            //打印控制台输出
+            System.out.printf("person was out order by no:",first.getNo());
+            //将找到节点删除
+            first=first.getNext();
+            helper.setNext(first);
+        }
+
+        System.out.printf("last person number is,",first.getNo());
+    }
+
+
 }
 
 class PersonNode{
