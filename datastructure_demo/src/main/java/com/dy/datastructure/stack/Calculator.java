@@ -55,9 +55,7 @@ public class Calculator {
                         numStack.push(res);
                         //将当前操作符号也入栈
                         operStack.push(Integer.valueOf( ch));
-
                     }
-
                 }else {
                     operStack.push(Integer.valueOf(ch));
                 }

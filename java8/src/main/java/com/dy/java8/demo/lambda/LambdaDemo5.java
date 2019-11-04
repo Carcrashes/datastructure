@@ -21,6 +21,9 @@ import java.util.function.Supplier;
  *  构造器引用：
  *  格式
  *  ClassName:new
+ *
+ *  数组引用：
+ *  type[]:new
  * @date 2019/10/28
  */
 public class LambdaDemo5 {
@@ -97,7 +100,17 @@ public class LambdaDemo5 {
 
         Function<Integer,Employee> function1=Employee::new;
         function1.apply(1);
+    }
 
+
+    public  void test6(){
+        //lambda 表达式方式 生成一个数组
+        Function<Integer,Integer[]> tag=(n)->new Integer[n];
+        Integer[] apply = tag.apply(10);//初始化长度为10的数组
+
+        //数组引用
+        Function<Integer,Integer[]> tag1=Integer[]::new;
+        Integer[] apply1 = tag1.apply(10);//初始化为10的数组
 
     }
 }
