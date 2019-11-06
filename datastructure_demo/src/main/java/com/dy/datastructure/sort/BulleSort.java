@@ -14,8 +14,8 @@ public class BulleSort {
 
             //测试冒泡排序
             int[] arr={3,9,-1,20,-2};
-            arr=bulleSort.bullesort(arr);
-       // System.out.println("排序后:"+Arrays.toString(arr));
+            //arr=bulleSort.bullesort(arr);
+        //System.out.println("排序后:"+Arrays.toString(arr));
     }
 
 
@@ -27,7 +27,7 @@ public class BulleSort {
         //第一趟  确定最大的值放到末尾
         for (int i=0;i<arr.length-1-0;i++){
             if (arr[i]>arr[i+1]){
-                    //进行交交换
+                //进行交交换
                 temp=arr[i+1];
                 arr[i+1]=arr[i];
                 arr[i]=temp;
@@ -85,9 +85,9 @@ public class BulleSort {
             for (int j=0;j<arr.length-1-i;j++){
                 if (arr[j]>arr[j+1]){
                     changeFlag=true; //记录是否发生交换
-                   temp=arr[j+1];
-                   arr[j+1]=arr[j];
-                   arr[j]=temp;
+                    temp=arr[j+1];
+                    arr[j+1]=arr[j];
+                    arr[j]=temp;
                 }
             }
             if (!changeFlag){
@@ -96,7 +96,6 @@ public class BulleSort {
                 changeFlag=false;//重置标志位
             }
         }
-
         return arr;
     }
 
