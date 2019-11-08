@@ -17,16 +17,16 @@ public class StreamReduceDemo {
 
     //模拟数据值
     List<Employee> employees=new ArrayList<>(Arrays.asList(
-            new Employee("zhangsan",18,9999),
-            new Employee("lisi",19,8888),
-            new Employee("wangwu",20,7777),
-            new Employee("liulu",21,4444),
-            new Employee("dingyu",38,5555),
-            new Employee("dingli",50,3333),
-            new Employee("wangkeshan",35,1111),
-            new Employee("wangkeshan",35,1111),
-            new Employee("wangkeshan",35,1111),
-            new Employee("wangkeshan",35,1111)
+            new Employee("zhangsan",18,9999, Employee.Status.VOCATION),
+            new Employee("lisi",19,8888,Employee.Status.BUSY),
+            new Employee("wangwu",20,7777,Employee.Status.FREE),
+            new Employee("liulu",21,4444, Employee.Status.VOCATION),
+            new Employee("dingyu",38,5555, Employee.Status.FREE),
+            new Employee("dingli",50,3333, Employee.Status.FREE),
+            new Employee("wangkeshan",35,1111, Employee.Status.BUSY),
+            new Employee("wangkeshan",35,1111, Employee.Status.BUSY),
+            new Employee("wangkeshan",35,1111, Employee.Status.VOCATION),
+            new Employee("wangkeshan",35,1111, Employee.Status.BUSY)
     ));
 
     @Test
@@ -115,6 +115,7 @@ public class StreamReduceDemo {
                 return "老年";
             }
         })));
+        System.out.println("多级分组结果:"+collect1);
         
     }
     

@@ -1,6 +1,7 @@
 package com.dy.java8.demo.stream;
 
 import com.dy.java8.demo.entity.Employee;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,7 @@ public class StreamDemo1 {
     }
 
     //limit操作
+    @Test
     public void test2(){
         list.stream()
                 .filter(employee -> {

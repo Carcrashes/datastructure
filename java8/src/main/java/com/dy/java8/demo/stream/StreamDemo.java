@@ -1,11 +1,11 @@
 package com.dy.java8.demo.stream;
 
 import com.dy.java8.demo.entity.Employee;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -28,6 +28,7 @@ public class StreamDemo {
     /**
      * 创建Stream
      */
+    @Test
     public void test(){
 
         //通过list集合的stream()方法
@@ -48,7 +49,7 @@ public class StreamDemo {
                 .forEach(System.out::println); //终止操作
 
         //生成
-        Stream.generate(()->Math.random())
+        Stream.generate(()->Math.random()*36)
             .limit(10)    //限制10个数产生中间操作
             .forEach(System.out::println);//产生随机数 并操作
     }
