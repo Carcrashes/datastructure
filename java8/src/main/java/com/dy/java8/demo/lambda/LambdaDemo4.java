@@ -1,5 +1,6 @@
 package com.dy.java8.demo.lambda;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,15 +25,28 @@ import java.util.function.Supplier;
 public class LambdaDemo4 {
 
 
+
     //Comsumer<T>  消费型接口
     public void test(){
+        //消费
         comsumer(100,x->{
             System.out.println("消费了:"+x);
         });
+
+        //将x值加100
+        add(1,x->{
+            int i=x+ 100;
+            System.out.println("x加100："+i);
+        });
     }
 
+    
     public void  comsumer(double money, Consumer<Double> consumer){
         consumer.accept(money);
+    }
+
+    public void add(int money,Consumer<Integer> comsumer){
+            comsumer.accept(money);
     }
 
     //Supplier 供给型接口
@@ -72,7 +86,7 @@ public class LambdaDemo4 {
 
     // PreDicate<T>:断言型接口
     public void test4(){
-        List<String> list = filterString(Arrays.asList("xyz", "zzz", "xy"), x -> x.equals("X"));
+        List<String> list = filterString(Arrays.asList("xyz", "zzz", "xy"), x -> x.equals("x"));
         list.stream().forEach(c->{
             System.out.println(c);
         });

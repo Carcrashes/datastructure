@@ -9,7 +9,7 @@ import java.util.function.Consumer;
  * 一 lambda 表达式:
  *     基础语法: java 8中新引入了 “->” 符号
  *     左侧:Lambda表达式的参数列表
- *     右侧：表达式中所需的执行的j
+ *     右侧：表达式中所需的执行的代码
  *
  *    语法格式一：无参数，无返回值
  *      ()->system.out.println()
@@ -21,7 +21,7 @@ import java.util.function.Consumer;
  *    （x,y）->{
  *
  *    }
- *    语法格式五:lambda体 只有一套语句，return he 大括号都可以不写
+ *    语法格式五:lambda体 只有一套语句，return 和 大括号都可以不写
  *    （x，y）-> Integer.compare(x,y)
  *
  *   语法格式六：lambda表达式的数据类型可以不写，因为jvm可以通过上下文推断数据类型
