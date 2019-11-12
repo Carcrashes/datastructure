@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
@@ -40,15 +41,19 @@ public class DateTimeFormatDemo {
      */
     @Test
     public void test2(){
-        Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();  //获取所有时区
-        availableZoneIds.stream()
-                .forEach(System.out::println);
+        //获取所有时区
+        Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
+       // availableZoneIds.stream()
+        //        .forEach(System.out::println);
 
         //指定时区构建时间
         LocalDateTime localDateTime=LocalDateTime.now(ZoneId.of("Europe/Malta"));
-        System.out.println(localDateTime);
+       // System.out.println(localDateTime);
 
         //带时区的时间格式
-
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
+        System.out.println(now);
+        ZonedDateTime zonedDateTime = now.atZone(ZoneId.of("Europe/Malta"));
+        System.out.println(zonedDateTime);
     }
 }
