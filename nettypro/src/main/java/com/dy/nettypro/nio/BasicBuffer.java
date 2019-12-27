@@ -19,6 +19,7 @@ public class BasicBuffer {
         }
         //切换为读模式
         buffer.flip();
+
        //输出缓冲区数据
         while (buffer.hasRemaining()){
             System.out.println(buffer.get());

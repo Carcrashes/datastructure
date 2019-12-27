@@ -20,7 +20,7 @@ public class BioDemo {
     public static void main(String[] args) throws IOException {
         //线程池机制（可以同时处理多个客户端）
         //思路
-        //1.创建线程池 2.如果有客户端连接，则使用handle方法处理与之通讯
+            //1.创建线程池 2.如果有客户端连接，则使用handle方法处理与之通讯
         ExecutorService pool= Executors.newCachedThreadPool();//创建一个缓存线程池
         ServerSocket server=new ServerSocket(6666);//创建监听的服务端
         System.out.println("服务端启动");
