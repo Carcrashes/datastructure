@@ -55,11 +55,13 @@ public class NIOServer {
                 }
                 if (key.isReadable()) {
                     //OP_READ 事件，读取通道数据，通过key 方向获取channel
-                    SocketChannel channel = (SocketChannel) key.channel();
+                    Channel channel = key.channel();
+                    //转型
+                    SocketChannel dest=(SocketChannel)channel;
                     //获取关联的buffer
                     ByteBuffer byteBuffer = (ByteBuffer) key.attachment();
                     //读取数据
-                    channel.read(byteBuffer);
+                    dest.read(byteBuffer);
                     System.out.println("from clien message:" + new String(byteBuffer.array()));
                 }
 

@@ -5,7 +5,6 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * @author dingyu
@@ -16,23 +15,22 @@ public class GroupChatServer {
 
     private Selector selector;
 
-    private ServerSocketChannel serverSocketChannel;
+    private ServerSocketChannel listenChannel;
 
-    private InetSocketAddress inetSocketAddress;
+    private static final Integer  PORT=6667;
 
     public GroupChatServer() {
         try {
-            //创建通道信息
-            serverSocketChannel= ServerSocketChannel.open();
             //创建选择器
             selector=Selector.open();
+            //创建通道信息
+            listenChannel= ServerSocketChannel.open();
             //绑定端口
-            inetSocketAddress=new InetSocketAddress(6667);
-            serverSocketChannel.bind(inetSocketAddress);
+            listenChannel.socket().bind(new InetSocketAddress(PORT));
             //设置非阻塞
-            serverSocketChannel.configureBlocking(false);
+            listenChannel.configureBlocking(false);
             //注册到选择器
-            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+            listenChannel.register(selector, SelectionKey.OP_ACCEPT);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -42,6 +40,7 @@ public class GroupChatServer {
      * 监听消息
      */
     public void listen(){
+        System.out.println("监听线程: " + Thread.currentThread().getName());
         try {
             while (true){
                 //获取发生事件的通道
@@ -53,11 +52,10 @@ public class GroupChatServer {
                     if (keyIterator.hasNext()){
                         //取出SelectionKey
                         SelectionKey key = keyIterator.next();
-
                         //监听accept
                         if (key.isAcceptable()){
                             //客户端连接
-                            SocketChannel client = serverSocketChannel.accept();
+                            SocketChannel client = listenChannel.accept();
                             //设置非阻塞
                             client.configureBlocking(false);
                             //注册到选择器
@@ -73,13 +71,14 @@ public class GroupChatServer {
                         keyIterator.remove();
                     }
                 }else {
-                    System.out.println("等待连接。。。。");
+                   // System.out.println("等待连接。。。。");
+                   // continue;
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-
+            //发生异常
         }
     }
 
@@ -131,14 +130,22 @@ public class GroupChatServer {
         //获取所有通道
         for (SelectionKey key:selector.keys()){
             //根据key获取对应通道
-           SocketChannel targetChanne=(SocketChannel) key.channel();
+           Channel targetChannel=key.channel();
            //排除自己
-            if (targetChanne instanceof SocketChannel && targetChanne !=channel){
+            if (targetChannel instanceof SocketChannel && targetChannel !=channel){
+                //转型
+                SocketChannel dest = (SocketChannel)targetChannel;
                 //将msg存储到buffer中
                 ByteBuffer mesbuffer = ByteBuffer.wrap(msg.getBytes());
-                targetChanne.write(mesbuffer);
+                dest.write(mesbuffer);
             }
 
         }
+    }
+
+    public static void main(String[] args) {
+            GroupChatServer server=new GroupChatServer();
+            server.listen();
+
     }
 }
